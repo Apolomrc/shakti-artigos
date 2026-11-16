@@ -1,0 +1,76 @@
+
+.parcele ul {   /*alinha e muda aparencia*/
+  display: flex;
+  height: 45px;
+  width: auto;
+  gap: 23px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(7, 26, 26);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /*fonte temporaria, alterar*/
+  font-size: medium;
+}
+
+.parcele li{    /*muda cor dos bullet*/
+    color:rgb(32, 184, 176);
+}
+
+.conteiner {  /*alinha o conteiner, cria uma linha bem fina pra separação visual*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    width: 100%;
+    background-color: rgb(244, 251, 250);
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e0e0e0;
+
+}
+
+#logo img{  /*define tamanho e blocka ela pra não ficar saindo do layout porque .conteiner pai é flex*/
+    display: block;
+    height: 80px;
+    width: auto;
+}
+
+
+#nav ul{    /*separa cada item na horizontal*/
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+#nav li {   /*aparencia e o mouse por cima do item muda*/
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 600; 
+    color: #333;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.check{ /*alinha a caixa*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.check button{ /*aparencia do botao*/
+    background-color: #0d2b2b;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+#nav a{  /*reseta para nenhum a aparencia dos links*/
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+#nav a:hover{ /*ao passar mouse, cor do nav li muda*/
+    color: #20B8B0;
+}
+
+
+

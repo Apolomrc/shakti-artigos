@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100; /*verifcar como fica com apenas 100*/
+    font-style: normal;
+}
+
+:root {
+    --primary-color: #2c3e50; /*-- para criar uma variavel diferente*/
+    --accent-color: #e67e22;  
+    --text-color: #333333;
+    --bg-light: #f9f9f9;
+    --border-color: #e0e0e0;
+}
+
+body {
+    color: var(--text-color); /*var busca o valor de text color la no root*/
+    background-color: #ffffff;
+    line-height: 1.5;
+}
+
+button {  /*reset css pra todos os botoes*/
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit; /*herda a font do projeto*/
+  font-size: inherit;
+}
+

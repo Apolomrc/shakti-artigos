@@ -1,1 +1,32 @@
-<p>header works!</p>
+<header>
+    <div class="parcele">
+        <ul>
+            <li>Parcele em até 8x</li>
+            <li>Pague no depósito com desconto</li>
+            <li>Pedras naturais selecionadas</li>
+        </ul>
+    </div>
+
+    <div class="conteiner">
+        <div id="logo">
+            <a>
+            <img src="logo.png">
+            </a>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'japamalas' }">Japamalas</a></li> <!--esse queryparams vai servir depois para filtrar pela categoria no TS-->
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'pulseiras' }">Pulseiras</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Anéis' }">Anéis</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Colares' }">Colares</a></li>
+            </ul>
+        </nav>
+        <div class="check">
+            <p>Buscar</p>
+            <p>Entrar</p>
+            <button type="btn-carrinho">Carrinho</button>
+        </div>
+    </div>
+</header>
