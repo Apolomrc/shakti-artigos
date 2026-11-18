@@ -33,7 +33,7 @@ section {
   display: flex;
   width: 300%;
   height: 100%;
-  animation: passarBanners 45s infinite;
+  animation: passarBanners 25s infinite;
 }
 
 .banner-slide {
