@@ -1,0 +1,100 @@
+
+/* RODAPÉ GERAL */
+.rodape {
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* PARTE PRINCIPAL DO RODAPÉ */
+.rodape-conteudo {
+  background-color: #061e1c;
+  color: white;
+  padding: 50px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+/* LOGO E DESCRIÇÃO */
+.rodape-marca {
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo img {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+.rodape-marca p {
+  color: #a8c7c2;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 18px 0 40px;
+}
+
+.direitos {
+  color: #a8c7c2;
+  font-size: 10px;
+}
+
+/* COLUNAS DE LINKS */
+.rodape-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 70px;
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.coluna h3 {
+  color: #20b5aa;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin: 0 0 2px;
+}
+
+.coluna a {
+  color: #c0d2cf;
+  text-decoration: none;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.coluna a:hover {
+  color: #20b5aa;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .rodape-conteudo {
+    flex-direction: column;
+    padding: 40px 25px;
+  }
+
+  .rodape-links {
+    justify-content: space-between;
+    gap: 25px;
+  }
+
+  .rodape-marca {
+    max-width: 100%;
+  }
+
+  .rodape-marca p {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rodape-links {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
