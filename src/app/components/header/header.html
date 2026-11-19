@@ -15,7 +15,7 @@
         </div>
         <nav id="nav">
             <ul>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'japamalas' }">Japamalas</a></li> <!--esse queryparams vai servir depois para filtrar pela categoria no TS-->
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'japamalas' }">Japamalas</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'pulseiras' }">Pulseiras</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a></li>
@@ -25,7 +25,7 @@
         </nav>
         <div class="check">
             <p>Buscar</p>
-            <p>Entrar</p>
+            <p (click)="clicouLogin()" style="cursor: pointer;">Entrar</p>
             <button type="button">Carrinho</button>
         </div>
     </div>
