@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [RouterLink],
   selector: 'app-header',
-  styleUrl: './header.css',
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './header.html',
+  styleUrl: './header.css'
 })
-export class Header {}
+export class Header {
+  @Output() abrirLogin = new EventEmitter<void>();
+
+  clicouLogin() {
+    this.abrirLogin.emit();
+  }
+}
