@@ -1,1 +1,29 @@
-<p>produto works!</p>
+@if (produto) {
+  <div class="produto-overlay" (click)="voltar()">
+    <div class="produto-modal" (click)="$event.stopPropagation()">
+      <div class="produto-modal-imagem">
+        <img [src]="produto.imagem" [alt]="produto.nome">
+      </div>
+
+      <div class="produto-modal-info">
+        <span class="subtitulo">{{ produto.categoria }}</span>
+        <h2>{{ produto.nome }}</h2>
+        <p class="preco">{{ produto.preco }}</p>
+        <span class="pagamento">{{ produto.pagamento }}</span>
+
+        <p class="descricao">
+          {{ produto.descricao || 'Peça artesanal feita com pedras e cristais naturais selecionados para equilibrar sua energia.' }}
+        </p>
+
+        <div class="produto-modal-acoes">
+          <button type="button" class="botao-principal">
+            Adicionar ao carrinho
+          </button>
+          <button type="button" class="botao-voltar" (click)="voltar()">
+            Voltar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -9,16 +9,18 @@
 
     <div class="conteiner">
         <div id="logo">
-            <a>
-            <img src="logo.png">
+            <a [routerLink]="['/']" style="cursor: pointer;">
+                <img src="logo.png" alt="Shakti Artigos">
             </a>
         </div>
         <nav id="nav">
             <ul>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'japamalas' }">Japamalas</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'pulseiras' }">Pulseiras</a></li>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a></li>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a>
+                </li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a>
+                </li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Anéis' }">Anéis</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Colares' }">Colares</a></li>
             </ul>

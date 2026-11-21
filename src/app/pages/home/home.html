@@ -33,7 +33,7 @@
           </p>
 
           <div class="banner-botoes">
-            <button class="botao-principal">
+            <button class="botao-principal" routerLink="/produtos">
               Explorar coleção
             </button>
 
@@ -174,91 +174,21 @@
       <h2>Destaques da semana</h2>
     </div>
 
-    <a href="#">Ver todos os produtos +</a>
+    <a routerLink="/produtos">Ver todos os produtos +</a>
   </div>
+
   <div class="lista-produtos">
+    @for (item of destaques; track item.nome) {
+      <div class="produto" (click)="abrirDetalhes(item)">
+        <img [src]="item.imagem" [alt]="item.nome">
 
-    <!-- PRODUTO 1 -->
-    <div class="produto">
-
-      <img
-        src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
-        alt="Fio de cristal"
-      >
-
-      <div class="produto-info">
-        <h3>Fio Cristal de Vidro Colorido Leitoso 6mm</h3>
-
-        <p class="preco">R$ 19,90</p>
-
-        <span class="pagamento">
-          ou 3x de R$ 6,96 · R$ 18,90 no depósito
-        </span>
+        <div class="produto-info">
+          <h3>{{ item.nome }}</h3>
+          <p class="preco">{{ item.preco }}</p>
+          <span class="pagamento">{{ item.pagamento }}</span>
+        </div>
       </div>
-
-    </div>
-
-
-    <!-- PRODUTO 2 -->
-    <div class="produto">
-
-      <img
-        src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500"
-        alt="Fio de pedra natural"
-      >
-
-      <div class="produto-info">
-        <h3>Fio de Pedra Natural Jade Mix 8mm</h3>
-
-        <p class="preco">R$ 44,90</p>
-
-        <span class="pagamento">
-          ou 8x de R$ 6,26 · R$ 42,66 no depósito
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- PRODUTO 3 -->
-    <div class="produto">
-
-      <img
-        src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500"
-        alt="Pedras naturais"
-      >
-
-      <div class="produto-info">
-        <h3>Fio de Pedras Naturais Artesanal</h3>
-
-        <p class="preco">R$ 39,90</p>
-
-        <span class="pagamento">
-          ou 6x de R$ 6,65 · R$ 37,90 no depósito
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- PRODUTO 4 -->
-    <div class="produto">
-
-      <img
-        src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
-        alt="Colar artesanal"
-      >
-
-      <div class="produto-info">
-        <h3>Colar Especial de Pedras Naturais</h3>
-
-        <p class="preco">R$ 56,90</p>
-
-        <span class="pagamento">
-          ou 8x de R$ 7,94 · R$ 54,05 no depósito
-        </span>
-      </div>
-    </div>
+    }
   </div>
 
 </section>
@@ -330,3 +260,7 @@
   </div>
 
 </section>
+
+@if (produtoSelecionado) {
+  <app-produto [produto]="produtoSelecionado" (fechar)="fecharDetalhes()"></app-produto>
+}

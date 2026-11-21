@@ -1,0 +1,130 @@
+:host {
+  display: block;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  color: #092321;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.produtos {
+  background-color: #f4fbfa;
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px 80px 60px;
+}
+
+.produtos-titulo {
+  max-width: 1400px;
+  margin: 0 auto 28px;
+}
+
+.subtitulo {
+  color: #20b8b0;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.produtos-titulo h2 {
+  font-size: 26px;
+  font-weight: 300;
+  margin: 8px 0 0;
+  text-transform: capitalize;
+}
+
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.produto {
+  background-color: white;
+  border-radius: 9px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #e5eeee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.produto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.produto img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.produto:hover img {
+  transform: scale(1.04);
+}
+
+.produto-info {
+  padding: 16px;
+  background-color: white;
+}
+
+.produto-info h3 {
+  color: #092321;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  min-height: 39px;
+  margin: 0 0 8px;
+}
+
+.produto-info .preco {
+  color: #078b83;
+  font-size: 26px;
+  font-weight: 500;
+  margin: 0 0 7px;
+}
+
+.produto-info .pagamento {
+  display: block;
+  color: #81918e;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .produtos {
+    padding: 30px 30px 45px;
+  }
+
+  .lista-produtos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .produto img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .produtos {
+    padding: 30px 24px 40px;
+  }
+
+  .lista-produtos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .produto img {
+    height: 145px;
+  }
+}
