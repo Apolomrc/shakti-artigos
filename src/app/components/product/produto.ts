@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  imports: [],
   selector: 'app-produto',
-  styleUrl: './produto.css',
+  standalone: true,
+  imports: [],
   templateUrl: './produto.html',
+  styleUrl: './produto.css'
 })
-export class Produto {}
+export class Produto {
+  @Input() produto: any;
+  @Output() fechar = new EventEmitter<void>();
+
+  voltar() {
+    this.fechar.emit();
+  }
+}
