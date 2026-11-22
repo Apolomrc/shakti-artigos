@@ -1,0 +1,763 @@
+:host {
+    --color-deep: #082723;
+    --color-teal: #18b7ae;
+    --color-teal-dark: #07978f;
+    --color-text: #102b27;
+    --color-muted: #71827e;
+    --color-border: #dce9e6;
+    --color-focus: rgba(24, 183, 174, 0.17);
+
+    display: block;
+    min-height: 100vh;
+    color: var(--color-text);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+:host,
+:host * {
+    box-sizing: border-box;
+}
+
+.register-page {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    padding: clamp(18px, 3vw, 42px);
+    background:
+        radial-gradient(circle at 12% 12%, rgba(24, 183, 174, 0.09), transparent 28%),
+        radial-gradient(circle at 90% 85%, rgba(8, 39, 35, 0.06), transparent 30%),
+        #edf5f2;
+}
+
+/* Os dois painéis têm a mesma largura para que possam trocar de lado com translateX. */
+.register-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    width: min(1120px, 100%);
+    min-height: 640px;
+    overflow: hidden;
+    border: none;
+    border-radius: 24px;
+    background: #f8fcfa;
+    box-shadow:
+        0 24px 65px rgba(8, 39, 35, 0.13),
+        0 3px 12px rgba(8, 39, 35, 0.05);
+    isolation: isolate;
+}
+
+.visual-panel,
+.form-panel {
+    position: relative;
+    min-width: 0;
+    min-height: 640px;
+    transition: transform 760ms cubic-bezier(0.22, 0.75, 0.25, 1);
+}
+
+/* A imagem começa à esquerda. No login, desliza para a direita. */
+.visual-panel {
+   position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+    min-height: 640px;
+
+    padding: 60px clamp(34px, 4vw, 58px) 42px;
+
+    isolation: isolate;
+    background: var(--color-deep);
+}
+
+.visual-image,
+.visual-overlay {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.visual-image {
+    z-index: 0;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 0;
+
+    transition: opacity 680ms cubic-bezier(0.22, 0.75, 0.25, 1);
+}
+
+.visual-image.active {
+    opacity: 1;
+}
+
+/* A composição de pedras do login deixa a área esquerda mais livre para a mensagem. */
+.login-visual-image {
+    object-position: 56% center;
+}
+
+.visual-overlay {
+    z-index: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(4, 27, 24, 0.04) 0%,
+        rgba(4, 27, 24, 0.12) 32%,
+        rgba(4, 27, 24, 0.84) 100%
+    );
+}
+
+.visual-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(100%, 430px);
+}
+
+.visual-message {
+    grid-area: 1 / 1;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(28px);
+    transition:
+        opacity 360ms ease,
+        transform 600ms cubic-bezier(0.22, 0.75, 0.25, 1),
+        visibility 0s linear 600ms;
+}
+
+.visual-message.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition:
+        opacity 420ms ease 120ms,
+        transform 650ms cubic-bezier(0.22, 0.75, 0.25, 1),
+        visibility 0s;
+}
+
+.login-mode .register-message {
+    transform: translateX(-28px);
+}
+
+.login-mode .login-message {
+    transform: translateX(0);
+}
+
+.visual-eyebrow {
+    margin: 0 0 16px;
+    color: #70e0d5;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.2em;
+}
+
+.visual-content h2 {
+    margin: 0;
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(36px, 3.6vw, 52px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+}
+
+.visual-content h2 span {
+    color: #70e0d5;
+    font-style: italic;
+}
+
+.visual-description {
+    max-width: 340px;
+    margin: 18px 0 24px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.visual-benefits {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.visual-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.benefit-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border: 1px solid rgba(184, 242, 234, 0.44);
+    border-radius: 10px;
+    background: rgba(220, 255, 249, 0.12);
+}
+
+.benefit-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #b8f2ea;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+}
+
+/* O formulário começa à direita e desliza para a esquerda no modo login. */
+.form-panel {
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px clamp(30px, 4vw, 54px) 42px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(24, 183, 174, 0.07), transparent 32%),
+        #f8fcfa;
+}
+
+/* A troca dos painéis acontece ao mesmo tempo: imagem para a direita, formulário para a esquerda. */
+.register-card.login-mode .visual-panel {
+    transform: translateX(100%);
+}
+
+.register-card.login-mode .form-panel {
+    transform: translateX(-100%);
+}
+
+.form-content {
+    width: min(100%, 540px);
+    margin: 0 auto;
+}
+
+.form-states {
+    display: grid;
+    width: 100%;
+}
+
+.form-state {
+    grid-area: 1 / 1;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-28px);
+    transition:
+        opacity 360ms ease,
+        transform 600ms cubic-bezier(0.22, 0.75, 0.25, 1),
+        visibility 0s linear 600ms;
+}
+
+.form-state.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition:
+        opacity 420ms ease 120ms,
+        transform 650ms cubic-bezier(0.22, 0.75, 0.25, 1),
+        visibility 0s;
+}
+
+.register-card:not(.login-mode) .login-state {
+    transform: translateX(28px);
+}
+
+.register-card.login-mode .register-state {
+    transform: translateX(-28px);
+}
+
+.form-heading {
+    margin-bottom: 23px;
+}
+
+.section-eyebrow {
+    margin: 0 0 9px;
+    color: var(--color-teal-dark);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.23em;
+}
+
+.form-heading h1 {
+    margin: 0;
+    color: var(--color-deep);
+    font-size: clamp(29px, 3vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.12;
+}
+
+.form-subtitle {
+    max-width: 440px;
+    margin: 9px 0 0;
+    color: var(--color-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.register-form,
+.login-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 14px;
+}
+
+.login-form {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field-full {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    color: #183a35;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.required-mark {
+    color: #c75a4e;
+}
+
+.optional-mark {
+    color: #91a29e;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.form-field input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 14px;
+    color: var(--color-text);
+    border: 1px solid #d4e2de;
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    font: inherit;
+    font-size: 11px;
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.form-field input::placeholder {
+    color: #8b9b97;
+}
+
+.form-field input:hover {
+    border-color: #b8d3cd;
+}
+
+.form-field input:focus {
+    border-color: var(--color-teal-dark);
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 4px var(--color-focus);
+}
+
+.form-field input:focus-visible,
+.terms-field input:focus-visible,
+.submit-button:focus-visible,
+.text-link:focus-visible,
+.terms-field a:focus-visible {
+    outline: 3px solid rgba(24, 183, 174, 0.36);
+    outline-offset: 3px;
+}
+
+.terms-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 1px;
+}
+
+.terms-field input {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    margin: 1px 0 0;
+    accent-color: var(--color-teal-dark);
+    cursor: pointer;
+}
+
+.terms-field label {
+    color: #667975;
+    font-size: 10px;
+    line-height: 1.55;
+    cursor: pointer;
+}
+
+.terms-field a,
+.text-link {
+    color: var(--color-teal-dark);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.terms-field a:hover,
+.text-link:hover {
+    color: var(--color-deep);
+}
+
+.submit-button {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 1px;
+    padding: 0 20px;
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(100deg, #19b8ad, #079b91);
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.submit-button svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 160ms ease;
+}
+
+.submit-button:hover {
+    background: linear-gradient(100deg, #079b91, #087f78);
+    box-shadow: 0 9px 20px rgba(7, 151, 143, 0.2);
+    transform: translateY(-1px);
+}
+
+.submit-button:hover svg {
+    transform: translateX(3px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.login-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    margin-top: 19px;
+}
+
+.login-prompt > span {
+    height: 1px;
+    flex: 1 1 auto;
+    background: #dce8e4;
+}
+
+.login-prompt p {
+    margin: 0;
+    color: #73837f;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.text-link {
+    margin-left: 4px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    text-decoration: none;
+}
+
+.form-footnote {
+    margin: 10px 0 0;
+    color: #9aa8a4;
+    font-size: 9px;
+    text-align: center;
+}
+
+/* CAMADA DE SOBREPOSIÇÃO */
+.auth-overlay {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+    box-sizing: border-box;
+
+    background: rgba(5, 25, 22, 0.48);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    z-index: 9999;
+
+    overflow-y: auto;
+}
+
+/* ÁREA DO FORMULÁRIO */
+.auth-overlay .register-page {
+    width: 100%;
+    min-height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+}
+
+/* CARD DE LOGIN E CADASTRO */
+.auth-overlay .register-card {
+    width: 100%;
+    max-width: 1120px;
+
+    margin: auto;
+
+    animation: modalEntrada 0.3s ease;
+}
+
+/* ANIMAÇÃO DE ENTRADA */
+@keyframes modalEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .auth-overlay {
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .auth-overlay .register-page {
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 1000px) and (min-width: 841px) {
+    .visual-panel {
+        padding: 48px 32px 32px;
+    }
+
+    .visual-content h2 {
+        font-size: clamp(34px, 4vw, 45px);
+    }
+
+    .form-panel {
+        padding: 48px 28px 34px;
+    }
+}
+
+/* Em telas menores, os painéis ficam empilhados; a troca de conteúdo continua funcionando. */
+@media (max-width: 840px) {
+    .register-page {
+        padding: 22px;
+    }
+
+    .register-card {
+        width: min(620px, 100%);
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .visual-panel,
+    .form-panel,
+    .register-card.login-mode .visual-panel,
+    .register-card.login-mode .form-panel {
+        min-height: 0;
+        transform: none;
+        transition: none;
+    }
+
+    .visual-panel {
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .visual-image {
+        object-position: 65% 43%;
+    }
+
+    .visual-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(4, 27, 24, 0.78) 0%,
+            rgba(4, 27, 24, 0.43) 57%,
+            rgba(4, 27, 24, 0.1) 100%
+        );
+    }
+
+    .visual-content {
+        width: min(75%, 390px);
+    }
+
+    .visual-content h2 {
+        font-size: clamp(34px, 7vw, 44px);
+    }
+
+    .visual-description {
+        margin: 13px 0 16px;
+        font-size: 12px;
+    }
+
+    .visual-benefits {
+        gap: 7px;
+    }
+
+    .visual-benefits li {
+        font-size: 11px;
+    }
+
+    .benefit-icon {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+    }
+
+    .form-panel {
+        padding: 34px clamp(24px, 6vw, 48px) 38px;
+    }
+
+    .form-content {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 520px) {
+    .register-page {
+        padding: 12px;
+    }
+
+    .register-card {
+        border-radius: 18px;
+    }
+
+    .visual-panel {
+        min-height: 265px;
+        padding: 24px 21px;
+    }
+
+    .visual-content {
+        width: 86%;
+    }
+
+    .visual-eyebrow {
+        font-size: 8px;
+    }
+
+    .visual-content h2 {
+        font-size: 32px;
+    }
+
+    .visual-description {
+        max-width: 270px;
+    }
+
+    .form-panel {
+        padding: 30px 20px 32px;
+    }
+
+    .form-heading {
+        margin-bottom: 20px;
+    }
+
+    .form-heading h1 {
+        font-size: 30px;
+    }
+
+    .form-subtitle {
+        font-size: 11px;
+    }
+
+    .register-form {
+        grid-template-columns: 1fr;
+        row-gap: 13px;
+    }
+
+    .field-full {
+        grid-column: auto;
+    }
+
+    .form-field input {
+        min-height: 44px;
+    }
+
+    .submit-button {
+        min-height: 47px;
+    }
+
+    .login-prompt {
+        gap: 9px;
+        margin-top: 17px;
+    }
+
+    .login-prompt p {
+        font-size: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+

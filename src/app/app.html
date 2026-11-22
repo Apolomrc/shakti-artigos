@@ -1,7 +1,11 @@
-<app-header (abrirLogin)="abrirTelaLogin()"></app-header>
+<app-header 
+  (abrirLogin)="abrirAutenticacao()">
+</app-header>
+
+@if (mostrarAutenticacao) {
+  <app-cadastro 
+    (fechar)="fecharAutenticacao()">
+  </app-cadastro>
+}
 
 <router-outlet></router-outlet>
-
-@if (mostrarLogin) {
-  <app-login (fechar)="fecharTelaLogin()"></app-login>
-}
