@@ -1,0 +1,22 @@
+<div class="admin-login-container">
+  <div class="admin-login-card">
+    
+    <span class="subtitulo">ÁREA RESTRITA</span>
+    <h2>Painel Administrativo</h2>
+
+    <form (submit)="entrar()">
+      <div class="campo">
+        <label>E-mail de acesso</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="admin@shakti.com" required>
+      </div>
+
+      <div class="campo">
+        <label>Senha</label>
+        <input type="password" [(ngModel)]="senha" name="senha" placeholder="Sua senha" required>
+      </div>
+
+      <button type="submit" class="botao-principal">Entrar no sistema</button>
+    </form>
+
+  </div>
+</div>
