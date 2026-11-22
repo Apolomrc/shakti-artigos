@@ -18,6 +18,16 @@
 :host * {
     box-sizing: border-box;
 }
+.terms-text {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.terms-text a {
+    color: #254c39;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 .register-page {
     display: grid;
