@@ -645,9 +645,17 @@ section {
   }
 
   *,
-  *::before,
+  *::before, 
   *::after {
     transition-duration: 0.01ms !important;
   }
 
+}
+
+#admin {
+  color:rgb(255, 255, 255)
+}
+
+#admin:hover {
+  color:rgba(0, 0, 0, 0.13)
 }
