@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { API_URL } from './api';
 
 export interface Product {
@@ -11,6 +12,7 @@ export interface Product {
   descricao: string;
   imagem: string;
   destaque?: boolean;
+  sku?: string;
 }
 
 /** Categorias oficiais. Usadas no header, nas bolinhas da home e no admin. */
@@ -70,6 +72,18 @@ export class ProductService {
 
   porId(id: number) {
     return this.vitrine().find(p => p.id === id);
+  }
+
+  criar(dados: Omit<Product, 'id'>): Observable<Product> {
+    return this.http.post<Product>(`${API_URL}/produtos`, dados).pipe(tap(() => this.carregar()));
+  }
+
+  atualizar(id: number, dados: Omit<Product, 'id'>): Observable<Product> {
+    return this.http.put<Product>(`${API_URL}/produtos/${id}`, { ...dados, id }).pipe(tap(() => this.carregar()));
+  }
+
+  ajustarEstoque(id: number, estoque: number): Observable<Product> {
+    return this.http.patch<Product>(`${API_URL}/produtos/${id}`, { estoque }).pipe(tap(() => this.carregar()));
   }
 
   add(p: Omit<Product, 'id'>) {

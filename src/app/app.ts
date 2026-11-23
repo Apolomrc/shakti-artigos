@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
@@ -18,6 +18,16 @@ export class App {
   cart = inject(CartService);
 
   mostrarAutenticacao = false;
+  mostrarTopo = signal(false);
+
+  @HostListener('window:scroll')
+  aoRolar() {
+    this.mostrarTopo.set(window.scrollY > 600);
+  }
+
+  subirAoTopo() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   get noAdmin() {
     return this.router.url.startsWith('/admin');

@@ -17,13 +17,14 @@ export class ProductList implements OnInit {
 
   categoriaAtual = '';
   termoBusca = '';
+  ordem = '';
   produtoSelecionado: ProdutoVitrine | null = null;
 
   get produtosFiltrados(): ProdutoVitrine[] {
     const termo = this.termoBusca.trim().toLowerCase();
     const cat = this.categoriaAtual.trim().toLowerCase();
 
-    return this.service.vitrine().filter(p => {
+    const lista = this.service.vitrine().filter(p => {
       if (cat && p.categoria.toLowerCase() !== cat) return false;
       if (termo) {
         const texto = `${p.nome} ${p.categoria} ${p.descricao}`.toLowerCase();
@@ -31,10 +32,12 @@ export class ProductList implements OnInit {
       }
       return true;
     });
+    return this.ordem === 'novidades' ? [...lista].sort((a, b) => b.id - a.id) : lista;
   }
 
   get titulo(): string {
     if (this.termoBusca) return `Resultados para “${this.termoBusca}”`;
+    if (this.ordem === 'novidades') return 'Novidades';
     return this.categoriaAtual || 'Todos os produtos';
   }
 
@@ -42,6 +45,7 @@ export class ProductList implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.categoriaAtual = params['categoria'] || '';
       this.termoBusca = params['busca'] || '';
+      this.ordem = params['ordem'] || '';
       this.cdr.detectChanges();
     });
   }

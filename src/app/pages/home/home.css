@@ -671,3 +671,20 @@ a.categoria:focus-visible .categoria-bola {
   outline: 2px solid #20b8b0;
   outline-offset: 4px;
 }
+
+/* Botões Ver mais / Fechar lista */
+.mostrar-mais { display: flex; justify-content: center; gap: 14px; margin: 26px 0 8px; }
+
+/* Newsletter: estados e animações */
+.novidades-formulario button { transition: transform 0.2s ease, background-color 0.3s ease; }
+.novidades-formulario button:hover:not(:disabled) { transform: translateY(-2px); }
+.novidades-formulario button.enviando { opacity: 0.8; animation: pulsar 0.9s ease-in-out infinite; }
+.novidades-formulario button.ok { background: #07978f; animation: entrar-ok 0.5s ease both; }
+.novidades-formulario input:disabled { opacity: 0.6; }
+.check-anim { display: inline-block; margin-right: 6px; animation: estourar 0.5s ease both; }
+.erro-newsletter { margin: 10px 0 0; font-size: 13px; color: #a3261c; text-align: center; }
+
+@keyframes pulsar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes entrar-ok { from { transform: scale(0.92); } to { transform: scale(1); } }
+@keyframes estourar { 0% { transform: scale(0); } 70% { transform: scale(1.3); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .novidades-formulario button, .check-anim { animation: none !important; } }

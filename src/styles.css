@@ -31,3 +31,44 @@ button {  /*reset css pra todos os botoes*/
   font-size: inherit;
 }
 
+
+/* ===== Área administrativa (classes com prefixo adm-) ===== */
+.adm-titulo { margin: 0; font-size: 30px; font-weight: 400; color: #082723; }
+.adm-sub { margin: 4px 0 0; font-size: 14px; color: #71827e; }
+.adm-cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.adm-card { background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 1px 3px rgba(8, 39, 35, 0.06); }
+.adm-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+.adm-stat small { font-size: 12px; color: #71827e; }
+.adm-stat strong { display: block; margin: 6px 0 2px; font-size: 26px; font-weight: 400; color: #082723; }
+.adm-stat span { font-size: 12px; color: #71827e; }
+.adm-tabela { width: 100%; border-collapse: collapse; font-size: 14px; }
+.adm-tabela th { text-align: left; padding: 10px 8px; font-size: 11px; letter-spacing: 1px; color: #71827e; border-bottom: 1px solid #e5efec; text-transform: uppercase; }
+.adm-tabela td { padding: 14px 8px; border-bottom: 1px solid #f0f6f4; color: #102b27; vertical-align: middle; }
+.adm-tabela td.num { text-align: right; }
+.adm-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; background: #d7f1ed; color: #07574f; }
+.adm-pill.alerta { background: #fbd9d5; color: #a3261c; }
+.adm-pill.neutro { background: #eef2f1; color: #44615c; }
+.adm-botao { display: inline-block; padding: 11px 20px; border: none; border-radius: 25px; background: #20b8b0; color: #fff; font-size: 14px; cursor: pointer; text-decoration: none; }
+.adm-botao:hover { background: #0d2b2b; }
+.adm-botao:disabled { opacity: 0.45; cursor: not-allowed; }
+.adm-botao.sec { background: #fff; color: #0d2b2b; border: 1px solid #cfe5e1; }
+.adm-botao.perigo { background: #fff; color: #a3261c; border: 1px solid #f1c4bf; }
+.adm-link { border: none; background: none; color: #07978f; cursor: pointer; font-size: 13px; text-decoration: underline; padding: 0; }
+.adm-link.perigo { color: #a3261c; }
+.adm-input { width: 100%; padding: 11px 14px; border: 1px solid #cfe5e1; border-radius: 10px; font: inherit; font-size: 14px; background: #fff; outline: none; box-sizing: border-box; }
+.adm-input:focus { border-color: #20b8b0; }
+.adm-label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #44615c; }
+.adm-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.adm-form-grid .largo { grid-column: span 2; }
+.adm-vazio { padding: 40px 0; text-align: center; color: #71827e; font-size: 14px; }
+.adm-erro { margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; background: #fbd9d5; color: #a3261c; font-size: 13px; }
+.adm-barras { display: flex; align-items: flex-end; gap: 14px; height: 180px; padding-top: 10px; }
+.adm-barra { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 12px; color: #71827e; }
+.adm-barra div { width: 100%; background: #a9e7df; border-radius: 10px 10px 4px 4px; min-height: 4px; }
+.adm-barra.hoje div { background: #20b8b0; }
+@media (max-width: 900px) { .adm-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .adm-form-grid { grid-template-columns: 1fr; } .adm-form-grid .largo { grid-column: span 1; } }
+
+/* Botão flutuante de voltar ao topo */
+.voltar-topo { position: fixed; right: 22px; bottom: 22px; z-index: 150; padding: 11px 16px; border: none; border-radius: 25px; background: #0d2b2b; color: #fff; font: inherit; font-size: 13px; cursor: pointer; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); animation: entrar-topo 0.3s ease both; }
+.voltar-topo:hover { background: #20b8b0; }
+@keyframes entrar-topo { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

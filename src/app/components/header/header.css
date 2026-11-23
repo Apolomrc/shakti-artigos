@@ -236,3 +236,6 @@
   line-height: 20px;
   text-align: center;
 }
+
+/* Evita que a barra de ações quebre em duas linhas */
+.check { flex-wrap: nowrap; white-space: nowrap; }

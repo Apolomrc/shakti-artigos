@@ -12,7 +12,11 @@
 
   @if (produtosFiltrados.length === 0 && !service.erroApi()) {
     <div class="vazio">
-      <p>Nenhum produto encontrado{{ termoBusca ? ' para sua busca' : '' }}.</p>
+      @if (categoriaAtual && !termoBusca) {
+        <p>Ainda não temos peças em <strong>{{ categoriaAtual }}</strong>. Em breve novidades por aqui.</p>
+      } @else {
+        <p>Nenhum produto encontrado{{ termoBusca ? ' para sua busca' : '' }}.</p>
+      }
       <a routerLink="/produtos">Ver todos os produtos</a>
     </div>
   }

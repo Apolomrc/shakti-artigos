@@ -12,6 +12,10 @@
   <app-cart></app-cart>
 }
 
+@if (mostrarTopo() && !noAdmin) {
+  <button type="button" class="voltar-topo" (click)="subirAoTopo()" aria-label="Voltar ao topo">↑ Topo</button>
+}
+
 @if (!noAdmin) {
   <app-footer></app-footer>
 }

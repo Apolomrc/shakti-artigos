@@ -871,5 +871,109 @@
       "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
     }
   ],
-  "clientes": []
+  "clientes": [
+    {
+      "nome": "apolo",
+      "email": "teste@gmail.com",
+      "criadoEm": "2026-11-23T04:20:37.409Z",
+      "id": 1
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "SH-10482",
+      "cliente": "Ana Souza",
+      "email": "ana.souza@email.com",
+      "data": "2026-11-22T09:42:00",
+      "status": "pago",
+      "total": 97.6,
+      "itens": [
+        {
+          "nome": "Fio de Pedra Natural Jade Mix 8mm",
+          "quantidade": 1,
+          "preco": 44.9
+        },
+        {
+          "nome": "Pulseira Vermelha Kabbalah Sete Nós Para Bebês Proteção",
+          "quantidade": 2,
+          "preco": 16.9
+        }
+      ]
+    },
+    {
+      "id": "SH-10481",
+      "cliente": "Carlos Lima",
+      "email": "carlos.lima@email.com",
+      "data": "2026-11-22T08:15:00",
+      "status": "aguardando_pix",
+      "total": 44.9,
+      "itens": [
+        {
+          "nome": "Fio de Pedra Natural Jade Mix 8mm",
+          "quantidade": 1,
+          "preco": 44.9
+        }
+      ]
+    },
+    {
+      "id": "SH-10480",
+      "cliente": "Marina Reis",
+      "email": "marina.reis@email.com",
+      "data": "2026-11-21T19:03:00",
+      "status": "enviado",
+      "total": 33.8,
+      "itens": [
+        {
+          "nome": "Pulseira Vermelha Kabbalah Sete Nós Para Bebês Proteção",
+          "quantidade": 2,
+          "preco": 16.9
+        }
+      ]
+    },
+    {
+      "id": "SH-10479",
+      "cliente": "Pedro Alves",
+      "email": "pedro.alves@email.com",
+      "data": "2026-11-21T16:27:00",
+      "status": "aguardando_boleto",
+      "total": 139.9,
+      "itens": [
+        {
+          "nome": "Fio de Pedras Quartzo Verde Facetada",
+          "quantidade": 1,
+          "preco": 69.9
+        },
+        {
+          "nome": "Japamala 108 Contas Madeira com tassel azul marinho",
+          "quantidade": 1,
+          "preco": 39.9
+        },
+        {
+          "nome": "Fio Cristal de Vidro Colorido Transparente 6mm",
+          "quantidade": 1,
+          "preco": 19.9
+        }
+      ]
+    },
+    {
+      "id": "SH-10478",
+      "cliente": "Juliana Costa",
+      "email": "juliana.costa@email.com",
+      "data": "2026-11-20T14:10:00",
+      "status": "entregue",
+      "total": 55,
+      "itens": [
+        {
+          "nome": "Fio Cristal de Vidro Doce de Leite",
+          "quantidade": 1,
+          "preco": 11.94
+        },
+        {
+          "nome": "Fio de Pedra Natural Ágata Amarela",
+          "quantidade": 1,
+          "preco": 24.9
+        }
+      ]
+    }
+  ]
 }

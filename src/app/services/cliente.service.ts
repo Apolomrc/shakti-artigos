@@ -15,6 +15,10 @@ export interface Cliente {
 export class ClienteService {
   private http = inject(HttpClient);
 
+  listar(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(`${API_URL}/clientes`);
+  }
+
   buscarPorEmail(email: string): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${API_URL}/clientes`, { params: { email } });
   }

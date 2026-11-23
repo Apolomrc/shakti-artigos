@@ -37,7 +37,7 @@
               Explorar coleção
             </button>
 
-            <button class="botao-secundario">
+            <button class="botao-secundario" routerLink="/produtos" [queryParams]="{ ordem: 'novidades' }">
               Ver novidades
             </button>
           </div>
@@ -127,6 +127,10 @@
 
   </div>
 
+  @if (erroNewsletter()) {
+    <p class="erro-newsletter">{{ erroNewsletter() }}</p>
+  }
+
 </section>
 
 
@@ -177,7 +181,7 @@
   </div>
 
   <div class="lista-produtos">
-    @for (item of destaques(); track item.id) {
+    @for (item of visiveis(); track item.id) {
       <div class="produto" (click)="abrirDetalhes(item)">
         <img [src]="item.imagem" [alt]="item.nome">
 
@@ -189,6 +193,17 @@
       </div>
     }
   </div>
+
+  @if (total() > 4) {
+    <div class="mostrar-mais">
+      @if (quantidade() < total()) {
+        <button type="button" class="botao-secundario" (click)="verMais()">Ver mais</button>
+      }
+      @if (quantidade() > 4) {
+        <button type="button" class="botao-secundario" (click)="fecharLista()">Fechar lista</button>
+      }
+    </div>
+  }
 
 </section>
 
@@ -250,10 +265,16 @@
     <input
       type="email"
       placeholder="Seu melhor e-mail"
+      name="emailNewsletter"
+      [(ngModel)]="emailNewsletter"
+      [disabled]="inscrito()"
+      (keyup.enter)="inscrever()"
     >
 
-    <button type="button">
-      Quero receber
+    <button type="button" [class.enviando]="enviando()" [class.ok]="inscrito()" [disabled]="enviando() || inscrito()" (click)="inscrever()">
+      @if (inscrito()) { <span class="check-anim" aria-hidden="true">✓</span> Inscrito!
+      } @else if (enviando()) { Enviando...
+      } @else { Quero receber }
     </button>
 
   </div>

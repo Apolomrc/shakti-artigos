@@ -34,8 +34,7 @@
                 <button type="button" class="link-acao" (click)="alternarBusca()">Buscar</button>
             }
 
-            @if (auth.usuario(); as usuario) {
-                <span class="link-acao saudacao">Olá, {{ auth.primeiroNome() }}</span>
+            @if (auth.usuario()) {
                 <button type="button" class="link-acao" (click)="sair()">Sair</button>
             } @else {
                 <button type="button" class="link-acao" (click)="clicouLogin()">Entrar</button>
