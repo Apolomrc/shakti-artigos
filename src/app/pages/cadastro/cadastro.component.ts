@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output, inject, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -19,7 +19,8 @@ export class CadastroComponent implements OnDestroy {
 
   @Output() fechar = new EventEmitter<void>();
 
-  modoLogin = false;
+  /** true abre direto na tela de login (usado pelo botão Entrar do cabeçalho). */
+  @Input() modoLogin = false;
 
   /** Estado da animação de sucesso: null quando não há nada sendo exibido. */
   sucesso = signal<{ titulo: string; texto: string } | null>(null);
