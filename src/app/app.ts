@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, CadastroComponent],
+  imports: [RouterOutlet, Header, Footer, CadastroComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
