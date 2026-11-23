@@ -3,7 +3,7 @@
 }
 
 @if (mostrarAutenticacao && !noAdmin) {
-  <app-cadastro (fechar)="fecharAutenticacao()"></app-cadastro>
+  <app-cadastro [modoLogin]="true" (fechar)="fecharAutenticacao()"></app-cadastro>
 }
 
 <router-outlet></router-outlet>
