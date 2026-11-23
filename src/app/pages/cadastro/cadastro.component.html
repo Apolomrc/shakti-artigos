@@ -1,0 +1,222 @@
+<div class="auth-overlay" (click)="fecharTela()">
+    <main class="register-page">
+        <div class="register-card" [class.login-mode]="modoLogin" (click)="$event.stopPropagation()">
+            <!-- Painel visual: a fotografia permanece no card e troca a mensagem conforme o modo. -->
+            <section class="visual-panel" aria-label="Shakti Artigos">
+                <img class="visual-image register-visual-image" [class.active]="!modoLogin"
+                    src="/colar-ametista-editorial.webp"
+                    alt="Colar com pingente de pedra natural em formato de coração, em tons de roxo"
+                    [attr.aria-hidden]="modoLogin">
+                <img class="visual-image login-visual-image" [class.active]="modoLogin"
+                    src="/composicao-pedras-login.webp"
+                    alt="Composição de ametistas, quartzo rosa, jade amazonita, cristais e peças artesanais sobre pedra natural"
+                    [attr.aria-hidden]="!modoLogin">
+
+                <div class="visual-overlay" aria-hidden="true"></div>
+
+                <div class="visual-content">
+                    <div class="visual-message register-message" [class.active]="!modoLogin"
+                        [attr.aria-hidden]="modoLogin" [attr.inert]="modoLogin ? '' : null">
+                        <p class="visual-eyebrow">PEDRAS NATURAIS · DETALHES ESPECIAIS</p>
+                        <h2>Sua essência<br>merece peças<br><span>especiais.</span></h2>
+                        <p class="visual-description">
+                            Crie sua conta e descubra um universo de acessórios feitos para acompanhar seu estilo.
+                        </p>
+
+                        <ul class="visual-benefits">
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m12 3 8 6-8 12L4 9l8-6Z M4 9h16 M8 9l4 12 4-12 M8 3l4 6 4-6" />
+                                    </svg>
+                                </span>
+                                Acompanhe seus pedidos
+                            </li>
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M20.8 8.8c0 5.2-8.8 11-8.8 11s-8.8-5.8-8.8-11A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.8 2.4Z" />
+                                    </svg>
+                                </span>
+                                Salve suas peças favoritas
+                            </li>
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M20 13 11 22H4a2 2 0 0 1-2-2v-7l9-9h7a2 2 0 0 1 2 2v7Z M16 8h.01" />
+                                    </svg>
+                                </span>
+                                Receba novidades e ofertas
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-message login-message" [class.active]="modoLogin" [attr.aria-hidden]="!modoLogin"
+                        [attr.inert]="!modoLogin ? '' : null">
+                        <p class="visual-eyebrow">É BOM TER VOCÊ DE VOLTA</p>
+                        <h2>Sua essência<br><span>continua aqui.</span></h2>
+                        <p class="visual-description">
+                            Acesse sua conta e continue descobrindo peças especiais, acompanhando seus pedidos e
+                            salvando seus favoritos.
+                        </p>
+
+                        <ul class="visual-benefits">
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 3 20 9 12 21 4 9 12 3Z M4 9h16 M8 9l4 12 4-12" />
+                                    </svg>
+                                </span>
+                                Pedras naturais selecionadas
+                            </li>
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M20.8 8.8c0 5.2-8.8 11-8.8 11s-8.8-5.8-8.8-11A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.8 2.4Z" />
+                                    </svg>
+                                </span>
+                                Peças com acabamento artesanal
+                            </li>
+                            <li>
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M12 2.8 14.4 9.6 21.2 12l-6.8 2.4L12 21.2l-2.4-6.8L2.8 12l6.8-2.4L12 2.8Z" />
+                                    </svg>
+                                </span>
+                                Uma experiência feita para você
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Painel dos formulários: os dois estados ocupam a mesma área. -->
+            <section class="form-panel" aria-live="polite">
+                <div class="form-content">
+                    <div class="form-states">
+                        <!-- CADASTRO -->
+                        <div class="form-state register-state" [class.active]="!modoLogin"
+                            [attr.aria-hidden]="modoLogin" [attr.inert]="modoLogin ? '' : null">
+                            <header class="form-heading">
+                                <p class="section-eyebrow">CADASTRO</p>
+                                <h1 id="register-title">Crie sua conta</h1>
+                                <p class="form-subtitle">
+                                    Faça parte da Shakti Artigos e acompanhe suas peças favoritas, pedidos e novidades.
+                                </p>
+                            </header>
+
+                            <form class="register-form" (ngSubmit)="cadastrar()">
+                                <div class="form-field field-full">
+                                    <label for="nome">Nome completo <span class="required-mark">*</span></label>
+                                    <input type="text" id="nome" name="nome" [(ngModel)]="nome"
+                                        placeholder="Digite seu nome completo" autocomplete="name" minlength="3"
+                                        required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="email-cadastro">E-mail <span class="required-mark">*</span></label>
+                                    <input type="email" id="email-cadastro" name="email" [(ngModel)]="email"
+                                        placeholder="seuemail@exemplo.com" autocomplete="email" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="telefone">Telefone <span class="optional-mark">(opcional)</span></label>
+                                    <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999"
+                                        autocomplete="tel">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="senha-cadastro">Senha <span class="required-mark">*</span></label>
+                                    <input type="password" id="senha-cadastro" name="senha" [(ngModel)]="senha"
+                                        placeholder="Mínimo de 8 caracteres" autocomplete="new-password" minlength="8"
+                                        required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="confirmarSenha">Confirmar senha <span
+                                            class="required-mark">*</span></label>
+                                    <input type="password" id="confirmarSenha" name="confirmarSenha"
+                                        [(ngModel)]="confirmarSenha" placeholder="Digite a senha novamente"
+                                        autocomplete="new-password" minlength="8" required>
+                                </div>
+
+                                <div class="terms-field field-full">
+                                    <input type="checkbox" id="termos" name="termos" [(ngModel)]="aceitouTermos" required>
+                                    <div class="terms-text">
+                                        <label for="termos">
+                                            Li e concordo com os
+                                        </label>    
+                                        <a routerLink="/termos-de-uso" target="_blank">Termos de Uso</a>
+                                        e a
+                                        <a routerLink="/politica-de-privacidade" target="_blank">Política de Privacidade</a>.
+                                        <span class="required-mark">*</span>
+                                    </div>
+                                        
+                                </div>
+
+                                <button class="submit-button field-full" type="submit">
+                                    Criar minha conta
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M5 12h14m-6-6 6 6-6 6" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <div class="login-prompt">
+                                <span aria-hidden="true"></span>
+                                <p>Já possui uma conta? <button class="text-link" type="button"
+                                        (click)="mostrarLogin()">Entrar</button></p>
+                                <span aria-hidden="true"></span>
+                            </div>
+
+                            <p class="form-footnote">* Campos obrigatórios</p>
+                        </div>
+
+                        <!-- LOGIN -->
+                        <div class="form-state login-state" [class.active]="modoLogin" [attr.aria-hidden]="!modoLogin"
+                            [attr.inert]="!modoLogin ? '' : null">
+                            <header class="form-heading">
+                                <p class="section-eyebrow">BEM-VINDO DE VOLTA</p>
+                                <h1 id="login-title">Acesse sua conta</h1>
+                                <p class="form-subtitle">
+                                    Entre com seus dados para continuar sua experiência na Shakti Artigos.
+                                </p>
+                            </header>
+
+                            <form class="login-form" (ngSubmit)="entrar()">
+                                <div class="form-field field-full">
+                                    <label for="email-login">E-mail <span class="required-mark">*</span></label>
+                                    <input type="email" id="email-login" name="emailLogin" [(ngModel)]="email"
+                                        placeholder="seuemail@exemplo.com" autocomplete="email" required>
+                                </div>
+
+                                <div class="form-field field-full">
+                                    <label for="senha-login">Senha <span class="required-mark">*</span></label>
+                                    <input type="password" id="senha-login" name="senhaLogin" [(ngModel)]="senha"
+                                        placeholder="Digite sua senha" autocomplete="current-password" required>
+                                </div>
+
+                                <button class="submit-button field-full" type="submit">
+                                    Entrar na minha conta
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M5 12h14m-6-6 6 6-6 6" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <div class="login-prompt">
+                                <span aria-hidden="true"></span>
+                                <p>Ainda não tem uma conta? <button class="text-link" type="button"
+                                        (click)="mostrarCadastro()">Criar conta</button></p>
+                                <span aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>

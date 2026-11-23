@@ -1,9 +1,9 @@
 @if (!noAdmin) {
-  <app-header (abrirLogin)="abrirTelaLogin()"></app-header>
+  <app-header (abrirLogin)="abrirAutenticacao()"></app-header>
+}
+
+@if (mostrarAutenticacao && !noAdmin) {
+  <app-cadastro (fechar)="fecharAutenticacao()"></app-cadastro>
 }
 
 <router-outlet></router-outlet>
-
-@if (mostrarLogin && !noAdmin) {
-  <app-login (fechar)="fecharTelaLogin()"></app-login>
-}
