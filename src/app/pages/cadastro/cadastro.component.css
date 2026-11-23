@@ -18,17 +18,25 @@
 :host * {
     box-sizing: border-box;
 }
+.terms-text label {
+    font-size: inherit;
+    color: inherit;
+}
 .terms-text {
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #66736b;
 }
 
 .terms-text a {
-    color: #254c39;
+    font-size: inherit;
+    font-weight: 600;
+    color: #009b91;
     text-decoration: underline;
-    cursor: pointer;
 }
-
+.terms-text .required-mark {
+    font-size: inherit;
+}
 .register-page {
     display: grid;
     min-height: 100vh;
@@ -407,7 +415,6 @@
     display: flex;
     align-items: flex-start;
     gap: 9px;
-    margin-top: 1px;
 }
 
 .terms-field input {

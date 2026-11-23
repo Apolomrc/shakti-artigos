@@ -1,9 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-cadastro',
-    imports: [FormsModule],
+    imports: [FormsModule, RouterLink],
     standalone: true,
     templateUrl: './cadastro.component.html',
     styleUrl: './cadastro.component.css'
