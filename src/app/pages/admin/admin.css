@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  color: #092321;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.admin {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4fbfa;
+}
+
+.menu-lateral {
+  width: 230px;
+  flex-shrink: 0;
+  background-color: #092321;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.logo {
+  color: #20b8b0;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo span {
+  color: white;
+  font-weight: 300;
+}
+
+.menu-lateral nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.menu-lateral nav a {
+  color: #cfeeea;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-lateral nav a:hover {
+  background-color: rgba(32, 184, 176, 0.15);
+}
+
+.menu-lateral nav a.ativo {
+  background-color: #20b8b0;
+  color: white;
+}
+
+.voltar {
+  color: #20b8b0;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.conteudo {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .admin {
+    flex-direction: column;
+  }
+
+  .menu-lateral {
+    width: 100%;
+  }
+}

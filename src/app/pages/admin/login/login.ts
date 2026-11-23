@@ -15,11 +15,11 @@ export class AdminLogin {
 
   constructor(private router: Router) {}
 
-  entrar() {
-    if (this.email && this.senha) {
-      alert('Login administrativo realizado com sucesso!');
-    } else {
-      alert('Preencha todos os campos.');
-    }
+ entrar() {
+  if (this.email && this.senha) {
+    this.router.navigate(['/admin/inventory']);
+  } else {
+    alert('Preencha todos os campos.');
   }
+}
 }

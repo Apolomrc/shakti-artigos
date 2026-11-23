@@ -7,7 +7,7 @@
   </div>
 
   <div class="lista-produtos">
-    @for (item of produtosFiltrados; track item.nome) {
+    @for (item of produtosFiltrados; track item.id) {
       <div class="produto" (click)="abrirDetalhes(item)">
         <img [src]="item.imagem" [alt]="item.nome">
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Login } from './pages/login/login';
 
@@ -11,7 +11,13 @@ import { Login } from './pages/login/login';
   styleUrl: './app.css'
 })
 export class App {
+  private router = inject(Router);
+
   mostrarLogin = false;
+
+  get noAdmin() {
+    return this.router.url.startsWith('/admin');
+  }
 
   abrirTelaLogin() {
     this.mostrarLogin = true;
