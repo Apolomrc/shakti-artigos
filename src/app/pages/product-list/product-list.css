@@ -128,3 +128,13 @@
     height: 145px;
   }
 }
+.vazio {
+  padding: 40px 0;
+  text-align: center;
+  color: #555;
+}
+
+.vazio a {
+  color: #07978f;
+  font-weight: 600;
+}

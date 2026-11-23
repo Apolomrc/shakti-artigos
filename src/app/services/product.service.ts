@@ -1,4 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { API_URL } from './api';
 
 export interface Product {
   id: number;
@@ -8,38 +10,73 @@ export interface Product {
   estoque: number;
   descricao: string;
   imagem: string;
+  destaque?: boolean;
+}
+
+/** Categorias oficiais. Usadas no header, nas bolinhas da home e no admin. */
+export const CATEGORIAS = [
+  'Japamalas',
+  'Pulseiras',
+  'Fios de Pedras',
+  'Fio de Cristal',
+  'Anéis',
+  'Colares',
+] as const;
+
+/** Visão do produto pronta para exibição (preço formatado, parcelamento). */
+export interface ProdutoVitrine extends Product {
+  precoFormatado: string;
+  pagamento: string;
+}
+
+const moeda = (valor: number) =>
+  valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+export function formatarProduto(p: Product): ProdutoVitrine {
+  const parcelas = p.preco >= 40 ? 8 : p.preco >= 30 ? 4 : 3;
+  const valorParcela = Math.floor((p.preco / parcelas) * 100) / 100;
+  const deposito = Math.floor(p.preco * 0.95 * 100) / 100;
+  return {
+    ...p,
+    precoFormatado: moeda(p.preco),
+    pagamento: `ou ${parcelas}x de ${moeda(valorParcela)} · ${moeda(deposito)} no depósito`,
+  };
 }
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  private nextId = 7;
+  private http = inject(HttpClient);
 
-  produtos = signal<Product[]>([
-    { id: 1, nome: 'Japamala 108 Contas Pedra Natural', categoria: 'Japamalas', preco: 89.9, estoque: 10,
-      descricao: 'Japamala tradicional com 108 contas de pedras naturais e tassel artesanal.',
-      imagem: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500' },
-    { id: 2, nome: 'Pulseira Quartzo Rosa', categoria: 'Pulseiras', preco: 34.9, estoque: 15,
-      descricao: 'Pulseira elástica com esferas naturais de quartzo rosa de 8mm.',
-      imagem: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500' },
-    { id: 3, nome: 'Fio de Pedra Natural Jade Mix 8mm', categoria: 'Fios de Pedras', preco: 44.9, estoque: 12,
-      descricao: 'Fio completo de pedra natural Jade Mix ideal para montagem de acessórios.',
-      imagem: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500' },
-    { id: 4, nome: 'Fio Cristal de Vidro Colorido Leitoso 6mm', categoria: 'Fio de Cristal', preco: 19.9, estoque: 30,
-      descricao: 'Fio de cristal de vidro leitoso com brilho suave e acabamento uniforme.',
-      imagem: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500' },
-    { id: 5, nome: 'Anel Ajustável Pedra da Lua', categoria: 'Anéis', preco: 29.9, estoque: 20,
-      descricao: 'Anel com aro ajustável e pedra natural lapidada manualmente.',
-      imagem: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500' },
-    { id: 6, nome: 'Colar Especial de Pedras Naturais', categoria: 'Colares', preco: 56.9, estoque: 5,
-      descricao: 'Colar artesanal com combinação exclusiva de pedras naturais e fecho resistente.',
-      imagem: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500' },
-  ]);
+  produtos = signal<Product[]>([]);
+  /** true quando a API não respondeu na última tentativa de carregar. */
+  erroApi = signal(false);
+
+  vitrine = computed(() => this.produtos().map(formatarProduto));
+  destaques = computed(() => this.vitrine().filter(p => p.destaque));
+
+  constructor() {
+    this.carregar();
+  }
+
+  carregar() {
+    this.http.get<Product[]>(`${API_URL}/produtos`).subscribe({
+      next: lista => {
+        this.produtos.set(lista);
+        this.erroApi.set(false);
+      },
+      error: () => this.erroApi.set(true),
+    });
+  }
+
+  porId(id: number) {
+    return this.vitrine().find(p => p.id === id);
+  }
 
   add(p: Omit<Product, 'id'>) {
-    this.produtos.update(list => [...list, { ...p, id: this.nextId++ }]);
+    this.http.post<Product>(`${API_URL}/produtos`, p).subscribe(() => this.carregar());
   }
 
   remove(id: number) {
-    this.produtos.update(list => list.filter(p => p.id !== id));
+    this.http.delete(`${API_URL}/produtos/${id}`).subscribe(() => this.carregar());
   }
 }

@@ -1,0 +1,135 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Japamala 108 Contas Pedra Natural",
+      "categoria": "Japamalas",
+      "preco": 89.9,
+      "estoque": 10,
+      "destaque": true,
+      "descricao": "Japamala tradicional com 108 contas de pedras naturais e tassel artesanal.",
+      "imagem": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
+    },
+    {
+      "id": 2,
+      "nome": "Japamala Ametista 108 Contas",
+      "categoria": "Japamalas",
+      "preco": 79.9,
+      "estoque": 8,
+      "destaque": false,
+      "descricao": "Japamala de ametista natural com 108 contas e fecho em metal dourado.",
+      "imagem": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
+    },
+    {
+      "id": 3,
+      "nome": "Japamala Olho de Tigre mala 54",
+      "categoria": "Japamalas",
+      "preco": 64.9,
+      "estoque": 6,
+      "destaque": false,
+      "descricao": "Mala de 54 contas em olho de tigre, ideal para meditação e uso diário.",
+      "imagem": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
+    },
+    {
+      "id": 4,
+      "nome": "Pulseira Quartzo Rosa",
+      "categoria": "Pulseiras",
+      "preco": 34.9,
+      "estoque": 15,
+      "destaque": true,
+      "descricao": "Pulseira elástica com esferas naturais de quartzo rosa de 8mm.",
+      "imagem": "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500"
+    },
+    {
+      "id": 5,
+      "nome": "Pulseira Turquesa e Prata",
+      "categoria": "Pulseiras",
+      "preco": 42.9,
+      "estoque": 9,
+      "destaque": false,
+      "descricao": "Pulseira com contas de turquesa natural e detalhes em prata 925.",
+      "imagem": "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500"
+    },
+    {
+      "id": 6,
+      "nome": "Fio de Pedra Natural Jade Mix 8mm",
+      "categoria": "Fios de Pedras",
+      "preco": 44.9,
+      "estoque": 12,
+      "destaque": true,
+      "descricao": "Fio completo de pedra natural Jade Mix ideal para montagem de acessórios.",
+      "imagem": "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500"
+    },
+    {
+      "id": 7,
+      "nome": "Fio de Pedras Naturais Artesanal",
+      "categoria": "Fios de Pedras",
+      "preco": 39.9,
+      "estoque": 7,
+      "destaque": false,
+      "descricao": "Fio artesanal de pedras naturais selecionadas com excelente acabamento.",
+      "imagem": "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500"
+    },
+    {
+      "id": 8,
+      "nome": "Fio Cristal de Vidro Colorido Leitoso 6mm",
+      "categoria": "Fio de Cristal",
+      "preco": 19.9,
+      "estoque": 30,
+      "destaque": true,
+      "descricao": "Fio de cristal de vidro leitoso com brilho suave e acabamento uniforme.",
+      "imagem": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
+    },
+    {
+      "id": 9,
+      "nome": "Fio Cristal Transparente 8mm",
+      "categoria": "Fio de Cristal",
+      "preco": 22.9,
+      "estoque": 25,
+      "destaque": false,
+      "descricao": "Fio de cristal transparente, leve e com brilho intenso.",
+      "imagem": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500"
+    },
+    {
+      "id": 10,
+      "nome": "Anel Ajustável Pedra da Lua",
+      "categoria": "Anéis",
+      "preco": 29.9,
+      "estoque": 20,
+      "destaque": false,
+      "descricao": "Anel com aro ajustável e pedra natural lapidada manualmente.",
+      "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
+    },
+    {
+      "id": 11,
+      "nome": "Anel Ágata Azul",
+      "categoria": "Anéis",
+      "preco": 36.9,
+      "estoque": 11,
+      "destaque": false,
+      "descricao": "Anel com pedra de ágata azul lapidada e aro ajustável.",
+      "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
+    },
+    {
+      "id": 12,
+      "nome": "Colar Especial de Pedras Naturais",
+      "categoria": "Colares",
+      "preco": 56.9,
+      "estoque": 5,
+      "destaque": true,
+      "descricao": "Colar artesanal com combinação exclusiva de pedras naturais e fecho resistente.",
+      "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
+    },
+    {
+      "id": 13,
+      "nome": "Colar Ametista Coração",
+      "categoria": "Colares",
+      "preco": 61.9,
+      "estoque": 4,
+      "destaque": false,
+      "descricao": "Colar com pingente de ametista em formato de coração.",
+      "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500"
+    }
+  ],
+  "clientes": []
+}

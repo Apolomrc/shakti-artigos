@@ -132,36 +132,35 @@
 
 <!-- CATEGORIAS -->
 <section class="categorias">
-
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Japamalas' }" [attr.aria-label]="'Ver Japamalas'">
     <div class="categoria-bola bola1"></div>
     <span>Japamalas</span>
-  </div>
+  </a>
 
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Pulseiras' }" [attr.aria-label]="'Ver Pulseiras'">
     <div class="categoria-bola bola2"></div>
     <span>Pulseiras</span>
-  </div>
+  </a>
 
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Fios de Pedras' }" [attr.aria-label]="'Ver Fios de Pedras'">
     <div class="categoria-bola bola3"></div>
-    <span>Fio de Pedras</span>
-  </div>
+    <span>Fios de Pedras</span>
+  </a>
 
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Fio de Cristal' }" [attr.aria-label]="'Ver Fio de Cristal'">
     <div class="categoria-bola bola4"></div>
     <span>Fio de Cristal</span>
-  </div>
+  </a>
 
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Anéis' }" [attr.aria-label]="'Ver Anéis'">
     <div class="categoria-bola bola5"></div>
     <span>Anéis</span>
-  </div>
+  </a>
 
-  <div class="categoria">
+  <a class="categoria" routerLink="/produtos" [queryParams]="{ categoria: 'Colares' }" [attr.aria-label]="'Ver Colares'">
     <div class="categoria-bola bola6"></div>
     <span>Colares</span>
-  </div>
+  </a>
 
 </section>
 
@@ -178,13 +177,13 @@
   </div>
 
   <div class="lista-produtos">
-    @for (item of destaques; track item.nome) {
+    @for (item of destaques(); track item.id) {
       <div class="produto" (click)="abrirDetalhes(item)">
         <img [src]="item.imagem" [alt]="item.nome">
 
         <div class="produto-info">
           <h3>{{ item.nome }}</h3>
-          <p class="preco">{{ item.preco }}</p>
+          <p class="preco">{{ item.precoFormatado }}</p>
           <span class="pagamento">{{ item.pagamento }}</span>
         </div>
       </div>

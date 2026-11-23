@@ -1,23 +1,44 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CartService } from '../../services/cart.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class Header {
+  private router = inject(Router);
+  cart = inject(CartService);
+  auth = inject(AuthService);
+
   @Output() abrirLogin = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  buscaAberta = signal(false);
+  termo = '';
 
   clicouLogin() {
     this.abrirLogin.emit();
   }
 
-  filtrarCategoria(cat: string) {
-    this.router.navigate(['/produtos'], { queryParams: { categoria: cat } });
+  sair() {
+    this.auth.sair();
+    this.router.navigateByUrl('/');
+  }
+
+  alternarBusca() {
+    this.buscaAberta.update(v => !v);
+  }
+
+  buscar() {
+    const termo = this.termo.trim();
+    if (!termo) return;
+    this.router.navigate(['/produtos'], { queryParams: { busca: termo } });
+    this.termo = '';
+    this.buscaAberta.set(false);
   }
 }

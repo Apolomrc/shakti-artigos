@@ -15,20 +15,38 @@
         </div>
         <nav id="nav">
             <ul>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'japamalas' }">Japamalas</a></li>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'pulseiras' }">Pulseiras</a></li>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a>
-                </li>
-                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a>
-                </li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Japamalas' }">Japamalas</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Pulseiras' }">Pulseiras</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fios de Pedras' }">Fios de Pedras</a></li>
+                <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Fio de Cristal' }">Fio de Cristal</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Anéis' }">Anéis</a></li>
                 <li><a [routerLink]="['/produtos']" [queryParams]="{ categoria: 'Colares' }">Colares</a></li>
             </ul>
         </nav>
         <div class="check">
-            <p>Buscar</p>
-            <p (click)="clicouLogin()" style="cursor: pointer;">Entrar</p>
-            <button type="button">Carrinho</button>
+            @if (buscaAberta()) {
+                <form class="busca-form" role="search" (ngSubmit)="buscar()">
+                    <input type="search" name="termo" [(ngModel)]="termo" placeholder="Buscar peças..."
+                        aria-label="Buscar produtos" autofocus>
+                    <button type="submit" class="busca-ir">Ir</button>
+                </form>
+            } @else {
+                <button type="button" class="link-acao" (click)="alternarBusca()">Buscar</button>
+            }
+
+            @if (auth.usuario(); as usuario) {
+                <span class="link-acao saudacao">Olá, {{ auth.primeiroNome() }}</span>
+                <button type="button" class="link-acao" (click)="sair()">Sair</button>
+            } @else {
+                <button type="button" class="link-acao" (click)="clicouLogin()">Entrar</button>
+            }
+
+            <button type="button" class="carrinho-link" (click)="cart.abrir()" aria-label="Abrir carrinho">
+                Carrinho
+                @if (cart.quantidadeTotal() > 0) {
+                    <span class="contador">{{ cart.quantidadeTotal() }}</span>
+                }
+            </button>
         </div>
     </div>
 </header>

@@ -54,8 +54,8 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
-    width: min(1120px, 100%);
-    min-height: 640px;
+    width: min(960px, 100%);
+    min-height: 540px;
     overflow: hidden;
     border: none;
     border-radius: 24px;
@@ -263,7 +263,7 @@
 }
 
 .form-content {
-    width: min(100%, 540px);
+    width: min(100%, 440px);
     margin: 0 auto;
 }
 
@@ -319,7 +319,7 @@
 .form-heading h1 {
     margin: 0;
     color: var(--color-deep);
-    font-size: clamp(29px, 3vw, 38px);
+    font-size: clamp(24px, 2.4vw, 30px);
     font-weight: 600;
     letter-spacing: -0.045em;
     line-height: 1.12;
@@ -778,3 +778,74 @@
     }
 }
 
+
+
+/* Animação de sucesso (cadastro e login) */
+.sucesso-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 32px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.96);
+    animation: sucesso-entrada 0.35s ease both;
+}
+
+.sucesso-overlay h2 {
+    margin: 8px 0 0;
+    color: var(--color-deep);
+    font-size: 24px;
+}
+
+.sucesso-overlay p {
+    margin: 0;
+    color: var(--color-muted);
+}
+
+.sucesso-selo svg {
+    width: 88px;
+    height: 88px;
+}
+
+.sucesso-circulo {
+    fill: none;
+    stroke: var(--color-teal);
+    stroke-width: 2.5;
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: sucesso-desenhar 0.6s ease forwards;
+}
+
+.sucesso-check {
+    fill: none;
+    stroke: var(--color-teal-dark);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: sucesso-desenhar 0.4s 0.5s ease forwards;
+}
+
+@keyframes sucesso-desenhar {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes sucesso-entrada {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sucesso-overlay,
+    .sucesso-circulo,
+    .sucesso-check {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}

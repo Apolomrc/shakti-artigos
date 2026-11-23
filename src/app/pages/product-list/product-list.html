@@ -2,9 +2,20 @@
   <div class="produtos-titulo">
     <div>
       <span class="subtitulo">CATÁLOGO</span>
-      <h2>{{ categoriaAtual || 'Todos os produtos' }}</h2>
+      <h2>{{ titulo }}</h2>
     </div>
   </div>
+
+  @if (service.erroApi()) {
+    <p class="erro-api">Não consegui carregar os produtos. Confira se a API está rodando (<code>npm run api</code>).</p>
+  }
+
+  @if (produtosFiltrados.length === 0 && !service.erroApi()) {
+    <div class="vazio">
+      <p>Nenhum produto encontrado{{ termoBusca ? ' para sua busca' : '' }}.</p>
+      <a routerLink="/produtos">Ver todos os produtos</a>
+    </div>
+  }
 
   <div class="lista-produtos">
     @for (item of produtosFiltrados; track item.id) {
@@ -13,7 +24,7 @@
 
         <div class="produto-info">
           <h3>{{ item.nome }}</h3>
-          <p class="preco">{{ item.preco }}</p>
+          <p class="preco">{{ item.precoFormatado }}</p>
           <span class="pagamento">{{ item.pagamento }}</span>
         </div>
       </div>

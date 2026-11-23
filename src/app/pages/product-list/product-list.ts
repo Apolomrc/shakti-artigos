@@ -1,59 +1,52 @@
 import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Produto } from '../../components/product/produto';
-import { ProductService } from '../../services/product.service';
+import { ProductService, ProdutoVitrine } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [Produto],
+  imports: [Produto, RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
 })
 export class ProductList implements OnInit {
-  private service = inject(ProductService);
+  service = inject(ProductService);
+  private route = inject(ActivatedRoute);
+  private cdr = inject(ChangeDetectorRef);
 
   categoriaAtual = '';
-  produtoSelecionado: any = null;
+  termoBusca = '';
+  produtoSelecionado: ProdutoVitrine | null = null;
 
-  constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
+  get produtosFiltrados(): ProdutoVitrine[] {
+    const termo = this.termoBusca.trim().toLowerCase();
+    const cat = this.categoriaAtual.trim().toLowerCase();
 
-  get produtos() {
-    return this.service.produtos().map(p => {
-      const parcelas = p.preco >= 40 ? 8 : p.preco >= 30 ? 4 : 3;
-      const valorParcela = Math.floor((p.preco / parcelas) * 100) / 100;
-      const deposito = Math.floor(p.preco * 0.95 * 100) / 100;
-      return {
-        id: p.id,
-        nome: p.nome,
-        categoria: p.categoria,
-        preco: this.moeda(p.preco),
-        pagamento: `ou ${parcelas}x de ${this.moeda(valorParcela)} · ${this.moeda(deposito)} no depósito`,
-        descricao: p.descricao,
-        imagem: p.imagem
-      };
+    return this.service.vitrine().filter(p => {
+      if (cat && p.categoria.toLowerCase() !== cat) return false;
+      if (termo) {
+        const texto = `${p.nome} ${p.categoria} ${p.descricao}`.toLowerCase();
+        if (!texto.includes(termo)) return false;
+      }
+      return true;
     });
   }
 
-  get produtosFiltrados() {
-    if (!this.categoriaAtual) return this.produtos;
-    return this.produtos.filter(
-      item => item.categoria.toLowerCase() === this.categoriaAtual.toLowerCase()
-    );
-  }
-
-  private moeda(valor: number) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  get titulo(): string {
+    if (this.termoBusca) return `Resultados para “${this.termoBusca}”`;
+    return this.categoriaAtual || 'Todos os produtos';
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.categoriaAtual = params['categoria'] || '';
+      this.termoBusca = params['busca'] || '';
       this.cdr.detectChanges();
     });
   }
 
-  abrirDetalhes(item: any) {
+  abrirDetalhes(item: ProdutoVitrine) {
     this.produtoSelecionado = item;
   }
 

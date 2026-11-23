@@ -1,129 +1,164 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { ClienteService } from '../../services/cliente.service';
 
 @Component({
-    selector: 'app-cadastro',
-    imports: [FormsModule, RouterLink],
-    standalone: true,
-    templateUrl: './cadastro.component.html',
-    styleUrl: './cadastro.component.css'
+  selector: 'app-cadastro',
+  imports: [FormsModule, RouterLink],
+  standalone: true,
+  templateUrl: './cadastro.component.html',
+  styleUrl: './cadastro.component.css'
 })
-export class CadastroComponent {
-    @Output() fechar = new EventEmitter<void>();
-    modoLogin = false;
+export class CadastroComponent implements OnDestroy {
+  private auth = inject(AuthService);
+  private clientes = inject(ClienteService);
+  private router = inject(Router);
+  private timer: ReturnType<typeof setTimeout> | null = null;
 
-    fecharTela(){
-        this.fechar.emit();
+  @Output() fechar = new EventEmitter<void>();
+
+  modoLogin = false;
+
+  /** Estado da animação de sucesso: null quando não há nada sendo exibido. */
+  sucesso = signal<{ titulo: string; texto: string } | null>(null);
+
+  nome: string = '';
+  email: string = '';
+  senha: string = '';
+  confirmarSenha: string = '';
+  aceitouTermos: boolean = false;
+
+  ngOnDestroy() {
+    if (this.timer) clearTimeout(this.timer);
+  }
+
+  fecharTela() {
+    this.fechar.emit();
+  }
+
+  mostrarLogin(): void {
+    this.modoLogin = true;
+  }
+
+  mostrarCadastro(): void {
+    this.modoLogin = false;
+  }
+
+  impedirEnvio(event: Event): void {
+    event.preventDefault();
+  }
+
+  validarEmail(): boolean {
+    const regraEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regraEmail.test(this.email);
+  }
+
+  validarSenha(): boolean {
+    return this.senha.length >= 8;
+  }
+
+  entrar() {
+    if (this.email.trim() === '') {
+      alert('Por favor digite seu e-mail');
+      return;
+    }
+    if (!this.validarEmail()) {
+      alert('Por favor digite um e-mail válido');
+      return;
+    }
+    if (this.senha === '') {
+      alert('Por favor digite sua senha');
+      return;
+    }
+    if (!this.validarSenha()) {
+      alert('Por favor digite uma senha válida (mínimo 8 caracteres)');
+      return;
     }
 
-    mostrarLogin(): void {
-        this.modoLogin = true;
+    const email = this.email.trim().toLowerCase();
+    this.clientes.buscarPorEmail(email).subscribe({
+      next: lista => {
+        if (lista.length === 0) {
+          alert('Não encontramos uma conta com este e-mail. Crie sua conta.');
+          return;
+        }
+        this.auth.entrar(lista[0]);
+        this.concluir({
+          titulo: `Bem-vindo de volta, ${lista[0].nome.split(' ')[0]}!`,
+          texto: 'Login realizado com sucesso.',
+        });
+      },
+      error: () => alert('Não foi possível conectar ao servidor. Confira se a API está rodando (npm run api).'),
+    });
+  }
+
+  cadastrar() {
+    this.nome = this.nome.trim();
+    this.email = this.email.trim().toLowerCase();
+
+    if (this.nome === '') {
+      alert('Por favor, digite seu nome');
+      return;
+    }
+    if (this.email === '') {
+      alert('Por favor, digite seu e-mail');
+      return;
+    }
+    if (!this.validarEmail()) {
+      alert('Por favor, digite um e-mail válido');
+      return;
+    }
+    if (this.senha === '') {
+      alert('Por favor, digite sua senha');
+      return;
+    }
+    if (!this.validarSenha()) {
+      alert('A senha precisa ter pelo menos 8 caracteres');
+      return;
+    }
+    if (this.confirmarSenha === '') {
+      alert('Por favor, confirme sua senha');
+      return;
+    }
+    if (this.senha !== this.confirmarSenha) {
+      alert('As senhas não correspondem');
+      return;
+    }
+    if (!this.aceitouTermos) {
+      alert('Você precisa aceitar os Termos de Uso para se cadastrar');
+      return;
     }
 
-    mostrarCadastro(): void {
-        this.modoLogin = false;
-    }
-
-    impedirEnvio(event: Event): void {
-        // Os formulários ainda não estão conectados ao backend.
-        // Isso evita que a página recarregue ao clicar nos botões.
-        event.preventDefault();
-    }
-
-    nome: string = '';
-    email: string = '';
-    senha: string = '';
-    confirmarSenha: string = '';
-    aceitouTermos: boolean = false;
-
-    validarEmail(): boolean {
-
-        const regraEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        return regraEmail.test(this.email);
-
-    }
-    validarSenha(): boolean {
-        // A senha deve ter pelo menos 8 caracteres.
-        return this.senha.length >= 8;
-    }
-    entrar() {
-        if (this.email === '') {
-            alert("Por favor digite seu e-mail");
-            return;
+    this.clientes.buscarPorEmail(this.email).subscribe({
+      next: lista => {
+        if (lista.length > 0) {
+          alert('Já existe uma conta com este e-mail. Entre na sua conta.');
+          return;
         }
-        if (!this.validarEmail()) {
-            alert("Por favor digite um e-mail válido");
-            return;
-        }
-        if (this.senha === '') {
-            alert("Por favor digite sua senha");
-            return;
-        }
-        if (!this.validarSenha()) {
-            alert("Por favor digite uma senha válida (mínimo 8 caracteres)");
-            return;
-        }
-        console.log("Entrando com e-mail:", this.email, "e senha:", this.senha);
-    }
-    cadastrar() {
+        this.clientes.cadastrar({ nome: this.nome, email: this.email }).subscribe({
+          next: cliente => {
+            this.auth.entrar(cliente);
+            this.concluir({
+              titulo: 'Conta criada com sucesso!',
+              texto: `Bem-vinda(o) à Shakti Artigos, ${cliente.nome.split(' ')[0]}.`,
+            });
+          },
+          error: () => alert('Não foi possível criar sua conta. Confira se a API está rodando (npm run api).'),
+        });
+      },
+      error: () => alert('Não foi possível conectar ao servidor. Confira se a API está rodando (npm run api).'),
+    });
+  }
 
-        this.nome = this.nome.trim();
-        this.email = this.email.trim().toLowerCase();
-
-        console.log("email cadastrado: ", this.email);
-        
-        // Verifica se o nome foi preenchido.
-        if (this.nome.trim() === '') {
-            alert("Por favor, digite seu nome");
-            return;
-        }
-
-        // Verifica se o e-mail foi preenchido.
-        if (this.email.trim() === '') {
-            alert("Por favor, digite seu e-mail");
-            return;
-        }
-
-        // Verifica se o e-mail possui formato válido.
-        if (!this.validarEmail()) {
-            alert("Por favor, digite um e-mail válido");
-            return;
-        }
-
-        // Verifica se a senha foi preenchida.
-        if (this.senha === '') {
-            alert("Por favor, digite sua senha");
-            return;
-        }
-
-        // Verifica se a senha possui pelo menos 8 caracteres.
-        if (!this.validarSenha()) {
-            alert("A senha precisa ter pelo menos 8 caracteres");
-            return;
-        }
-
-        // Verifica se a confirmação da senha foi preenchida.
-        if (this.confirmarSenha === '') {
-            alert("Por favor, confirme sua senha");
-            return;
-        }
-
-        // Verifica se as senhas são iguais.
-        if (this.senha !== this.confirmarSenha) {
-            alert("As senhas não correspondem");
-            return;
-        }
-
-        if (!this.aceitouTermos) {
-            alert("Você precisa aceitar os Termos de Uso para se cadastrar");
-            return;
-        }
-
-        console.log("Nome:", this.nome);
-        console.log("E-mail:", this.email);
-
-        alert("Cadastro preenchido corretamente!");
-    }
+  /** Mostra a animação de sucesso, fecha o modal e leva o usuário para a home. */
+  private concluir(mensagem: { titulo: string; texto: string }) {
+    this.sucesso.set(mensagem);
+    this.timer = setTimeout(() => {
+      this.sucesso.set(null);
+      this.fechar.emit();
+      this.router.navigateByUrl('/');
+    }, 2000);
+  }
 }

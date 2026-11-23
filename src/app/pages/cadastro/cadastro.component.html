@@ -1,6 +1,19 @@
 <div class="auth-overlay" (click)="fecharTela()">
     <main class="register-page">
         <div class="register-card" [class.login-mode]="modoLogin" (click)="$event.stopPropagation()">
+            @if (sucesso(); as msg) {
+                <div class="sucesso-overlay" role="status" aria-live="polite">
+                    <div class="sucesso-selo">
+                        <svg viewBox="0 0 52 52" aria-hidden="true">
+                            <circle class="sucesso-circulo" cx="26" cy="26" r="24" />
+                            <path class="sucesso-check" d="M15 27 l8 8 l14 -15" />
+                        </svg>
+                    </div>
+                    <h2>{{ msg.titulo }}</h2>
+                    <p>{{ msg.texto }}</p>
+                </div>
+            }
+
             <!-- Painel visual: a fotografia permanece no card e troca a mensagem conforme o modo. -->
             <section class="visual-panel" aria-label="Shakti Artigos">
                 <img class="visual-image register-visual-image" [class.active]="!modoLogin"

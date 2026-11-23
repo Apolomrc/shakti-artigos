@@ -1,1 +1,54 @@
-<p>cart works!</p>
+<div class="cart-overlay" (click)="fechar()">
+  <aside class="cart-painel" (click)="$event.stopPropagation()" role="dialog" aria-label="Seu carrinho">
+    <header class="cart-topo">
+      <h2>Seu carrinho ({{ cart.quantidadeTotal() }})</h2>
+      <button type="button" class="fechar" (click)="fechar()">Fechar ×</button>
+    </header>
+
+    @if (cart.itens().length === 0) {
+      <div class="vazio">
+        <p>Seu carrinho está vazio.</p>
+        <button type="button" class="continuar" (click)="continuar()">Ver produtos</button>
+      </div>
+    } @else {
+      <ul class="itens">
+        @for (item of cart.itens(); track item.produto.id) {
+          <li class="item">
+            <img [src]="item.produto.imagem" [alt]="item.produto.nome">
+            <div class="item-info">
+              <h3>{{ item.produto.nome }}</h3>
+              <p class="categoria-item">{{ item.produto.categoria }}</p>
+              <div class="linha-item">
+                <div class="quantidade">
+                  <button type="button" (click)="cart.alterarQuantidade(item.produto.id, -1)" aria-label="Diminuir">−</button>
+                  <span>{{ item.quantidade }}</span>
+                  <button type="button" (click)="cart.alterarQuantidade(item.produto.id, 1)"
+                    [disabled]="item.quantidade >= item.produto.estoque" aria-label="Aumentar">+</button>
+                </div>
+                <span class="subtotal">{{ moeda(item.produto.preco * item.quantidade) }}</span>
+              </div>
+              <button type="button" class="remover" (click)="cart.remover(item.produto.id)">Remover</button>
+            </div>
+          </li>
+        }
+      </ul>
+
+      <footer class="cart-rodape">
+        <div class="linha">
+          <span>Subtotal</span>
+          <span>{{ moeda(cart.total()) }}</span>
+        </div>
+        <div class="linha">
+          <span>Frete</span>
+          <span>Calculado no checkout</span>
+        </div>
+        <div class="linha total">
+          <span>Total</span>
+          <span>{{ moeda(cart.total()) }}</span>
+        </div>
+        <button type="button" class="botao-principal" (click)="finalizar()">Finalizar compra</button>
+        <button type="button" class="continuar" (click)="continuar()">Continuar comprando</button>
+      </footer>
+    }
+  </aside>
+</div>

@@ -7,12 +7,14 @@ import { Admin } from './pages/admin/admin';
 import { Estoque } from './pages/admin/inventory/estoque';
 
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { Checkout } from './pages/checkout/checkout';
 import { TermosDeUsoComponent } from './pages/termos-de-uso/termos-de-uso.component';
 import { PoliticaDePrivacidadeComponent } from './pages/politica-de-privacidade/politica-de-privacidade.component';
 
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'produtos', component: ProductList },
+  { path: 'checkout', component: Checkout },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'termos-de-uso', component: TermosDeUsoComponent },
   { path: 'politica-de-privacidade', component: PoliticaDePrivacidadeComponent },

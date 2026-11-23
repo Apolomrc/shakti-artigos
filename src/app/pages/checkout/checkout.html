@@ -1,0 +1,97 @@
+<main class="checkout">
+  <header class="checkout-topo">
+    <a routerLink="/produtos" class="voltar">← Continuar comprando</a>
+    <p class="etapas">Carrinho › <strong>Entrega e pagamento</strong> › Confirmação</p>
+  </header>
+
+  @if (cart.itens().length === 0) {
+    <div class="vazio">
+      <h1>Seu carrinho está vazio</h1>
+      <a routerLink="/produtos" class="botao-principal">Ver produtos</a>
+    </div>
+  } @else {
+    <div class="grid">
+      <form class="formulario" (ngSubmit)="$event.preventDefault()">
+        <section>
+          <h2>Contato</h2>
+          <div class="campos">
+            <label class="campo largo">Nome completo
+              <input name="nome" [ngModel]="nome()" (ngModelChange)="nome.set($event)" placeholder="Como aparece no documento">
+            </label>
+            <label class="campo">E-mail
+              <input type="email" name="email" [ngModel]="email()" (ngModelChange)="email.set($event)" placeholder="voce@email.com">
+            </label>
+            <label class="campo">Telefone / WhatsApp
+              <input type="tel" name="telefone" [ngModel]="telefone()" (ngModelChange)="telefone.set($event)" placeholder="(11) 99999-9999">
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <h2>Endereço de entrega</h2>
+          <div class="campos">
+            <label class="campo">CEP
+              <input name="cep" [(ngModel)]="cep" placeholder="00000-000">
+            </label>
+            <label class="campo">Número
+              <input name="numero" [(ngModel)]="numero" placeholder="123">
+            </label>
+            <label class="campo largo">Endereço
+              <input name="endereco" [(ngModel)]="endereco" placeholder="Rua, avenida ou praça">
+            </label>
+            <label class="campo largo">Complemento (opcional)
+              <input name="complemento" [(ngModel)]="complemento" placeholder="Apto, bloco, casa">
+            </label>
+            <label class="campo">Bairro
+              <input name="bairro" [(ngModel)]="bairro" placeholder="Bairro">
+            </label>
+            <label class="campo">Cidade
+              <input name="cidade" [(ngModel)]="cidade" placeholder="Cidade">
+            </label>
+          </div>
+        </section>
+
+        <section>
+          <h2>Entrega</h2>
+          @for (op of opcoesEntrega; track op.id) {
+            <label class="opcao" [class.ativa]="entrega() === op.id">
+              <input type="radio" name="entrega" [value]="op.id" [checked]="entrega() === op.id" (change)="entrega.set(op.id)">
+              <span class="opcao-texto">
+                <strong>{{ op.nome }}</strong>
+                <small>{{ op.prazo }}</small>
+              </span>
+              <span class="opcao-valor">{{ moeda(op.valor) }}</span>
+            </label>
+          }
+        </section>
+
+        <section>
+          <h2>Pagamento</h2>
+          <p class="aviso-pagamento">Formas de pagamento disponíveis em breve.</p>
+          @for (forma of ['Pix — aprovação imediata', 'Boleto bancário — compensação em até 3 dias úteis', 'Cartão de crédito — à vista ou em até 8x']; track forma) {
+            <label class="opcao desativada">
+              <input type="radio" name="pagamento" disabled>
+              <span class="opcao-texto"><strong>{{ forma }}</strong></span>
+            </label>
+          }
+        </section>
+      </form>
+
+      <aside class="resumo">
+        <h2>Resumo do pedido</h2>
+        @for (item of cart.itens(); track item.produto.id) {
+          <div class="linha-resumo">
+            <span>{{ item.produto.nome }} ×{{ item.quantidade }}</span>
+            <span>{{ moeda(item.produto.preco * item.quantidade) }}</span>
+          </div>
+        }
+        <div class="linha-resumo"><span>Subtotal</span><span>{{ moeda(cart.total()) }}</span></div>
+        <div class="linha-resumo"><span>Frete</span><span>{{ moeda(frete()) }}</span></div>
+        <div class="linha-resumo total"><span>Total</span><span>{{ moeda(totalPedido()) }}</span></div>
+
+        <button type="button" class="botao-principal" disabled>Confirmar pedido</button>
+        <p class="nota">O pagamento ainda não está disponível, por isso o pedido não é enviado.</p>
+      </aside>
+    </div>
+  }
+</main>

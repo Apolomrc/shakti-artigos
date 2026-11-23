@@ -659,3 +659,15 @@ section {
 #admin:hover {
   color:rgba(0, 0, 0, 0.13)
 }
+
+/* As bolinhas agora são links: sem sublinhado e com foco visível */
+a.categoria {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.categoria:focus-visible .categoria-bola {
+  outline: 2px solid #20b8b0;
+  outline-offset: 4px;
+}

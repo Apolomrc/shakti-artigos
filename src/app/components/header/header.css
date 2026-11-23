@@ -160,3 +160,79 @@
     gap: 15px;
   }
 }
+
+/* Ações do header: busca, entrar/sair, carrinho com contador */
+.check button.link-acao {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.check button.link-acao:hover {
+  background: none;
+  color: #20b8b0;
+}
+
+.check .saudacao {
+  color: #07978f;
+  font-size: 14px;
+}
+
+.busca-form {
+  display: flex;
+  gap: 6px;
+}
+
+.busca-form input {
+  width: 180px;
+  padding: 8px 14px;
+  border: 1px solid #cfe5e1;
+  border-radius: 20px;
+  font-size: 13px;
+  outline: none;
+}
+
+.busca-form input:focus {
+  border-color: #20b8b0;
+}
+
+.busca-ir {
+  padding: 8px 14px !important;
+  font-size: 12px !important;
+}
+
+.carrinho-link {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 22px;
+  border-radius: 25px;
+  background-color: #0d2b2b;
+  color: white !important;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.carrinho-link:hover {
+  background-color: #20b8b0;
+}
+
+.contador {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #20b8b0;
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}

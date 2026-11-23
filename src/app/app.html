@@ -8,6 +8,10 @@
 
 <router-outlet></router-outlet>
 
+@if (cart.aberto()) {
+  <app-cart></app-cart>
+}
+
 @if (!noAdmin) {
   <app-footer></app-footer>
 }

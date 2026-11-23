@@ -8,21 +8,45 @@
       <div class="produto-modal-info">
         <span class="subtitulo">{{ produto.categoria }}</span>
         <h2>{{ produto.nome }}</h2>
-        <p class="preco">{{ produto.preco }}</p>
+        <p class="preco">{{ produto.precoFormatado }}</p>
         <span class="pagamento">{{ produto.pagamento }}</span>
 
         <p class="descricao">
           {{ produto.descricao || 'Peça artesanal feita com pedras e cristais naturais selecionados para equilibrar sua energia.' }}
         </p>
 
+        @if (semEstoque) {
+          <p class="aviso">Produto esgotado no momento.</p>
+        } @else {
+          <div class="quantidade-linha">
+            <span>Quantidade</span>
+            <div class="quantidade">
+              <button type="button" (click)="mudarQuantidade(-1)" [disabled]="quantidade() <= 1" aria-label="Diminuir">−</button>
+              <span>{{ quantidade() }}</span>
+              <button type="button" (click)="mudarQuantidade(1)" [disabled]="quantidade() >= disponivel" aria-label="Aumentar">+</button>
+            </div>
+          </div>
+        }
+
         <div class="produto-modal-acoes">
-          <button type="button" class="botao-principal">
+          <button type="button" class="botao-principal" (click)="adicionarAoCarrinho()" [disabled]="semEstoque">
             Adicionar ao carrinho
           </button>
           <button type="button" class="botao-voltar" (click)="voltar()">
             Voltar
           </button>
         </div>
+
+        <p class="nota-frete">Pix, boleto ou cartão. Frete calculado no checkout.</p>
+
+        @if (mensagem()) {
+          <p class="feedback" role="status">
+            {{ mensagem() }}
+            @if (adicionadoAgora()) {
+              <a (click)="verCarrinho()">Ver carrinho →</a>
+            }
+          </p>
+        }
       </div>
     </div>
   </div>
