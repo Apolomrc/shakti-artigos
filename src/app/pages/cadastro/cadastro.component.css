@@ -54,8 +54,8 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
-    width: min(960px, 100%);
-    min-height: 540px;
+    width: min(1040px, 100%);
+    min-height: 600px;
     overflow: hidden;
     border: none;
     border-radius: 24px;
@@ -263,7 +263,7 @@
 }
 
 .form-content {
-    width: min(100%, 440px);
+    width: min(100%, 480px);
     margin: 0 auto;
 }
 
@@ -319,7 +319,7 @@
 .form-heading h1 {
     margin: 0;
     color: var(--color-deep);
-    font-size: clamp(24px, 2.4vw, 30px);
+    font-size: clamp(26px, 2.6vw, 34px);
     font-weight: 600;
     letter-spacing: -0.045em;
     line-height: 1.12;
